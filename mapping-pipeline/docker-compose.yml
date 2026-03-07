@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  hapi-fhir:
+    image: hapiproject/hapi:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - hapi.fhir.fhir_version=R4
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/fhir/metadata"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+volumes:
+  ollama_data:
