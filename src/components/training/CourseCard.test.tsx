@@ -52,4 +52,56 @@ describe('CourseCard', () => {
     const link = screen.getByRole('link', { name: /find advanced javascript on unknown/i });
     expect(link).toHaveAttribute('href', expect.stringContaining('google.com/search'));
   });
+
+  it('uses direct URL when a valid course url is provided', () => {
+    const courseWithUrl = { ...mockCourse, url: 'https://www.udemy.com/course/advanced-javascript/' };
+    render(<CourseCard course={courseWithUrl} />);
+    const link = screen.getByRole('link', { name: /find advanced javascript on udemy/i });
+    expect(link).toHaveAttribute('href', 'https://www.udemy.com/course/advanced-javascript/');
+  });
+
+  it('falls back to search URL when direct url is invalid', () => {
+    const courseWithBadUrl = { ...mockCourse, url: 'not-a-url' };
+    render(<CourseCard course={courseWithBadUrl} />);
+    const link = screen.getByRole('link', { name: /find advanced javascript on udemy/i });
+    expect(link).toHaveAttribute('href', expect.stringContaining('udemy.com/courses/search'));
+  });
+
+  it('falls back to search URL when url is empty', () => {
+    const courseNoUrl = { ...mockCourse, url: '' };
+    render(<CourseCard course={courseNoUrl} />);
+    const link = screen.getByRole('link', { name: /find advanced javascript on udemy/i });
+    expect(link).toHaveAttribute('href', expect.stringContaining('udemy.com/courses/search'));
+  });
+
+  it('rejects URL that does not match the assigned platform domain', () => {
+    const wrongPlatform = { ...mockCourse, url: 'https://www.coursera.org/learn/javascript' };
+    render(<CourseCard course={wrongPlatform} />);
+    const link = screen.getByRole('link', { name: /find advanced javascript on udemy/i });
+    expect(link).toHaveAttribute('href', expect.stringContaining('udemy.com/courses/search'));
+  });
+
+  it('rejects search-page URL that lacks a course-specific path', () => {
+    const searchPageUrl = { ...mockCourse, url: 'https://www.udemy.com/courses/search/?q=javascript' };
+    render(<CourseCard course={searchPageUrl} />);
+    const link = screen.getByRole('link', { name: /find advanced javascript on udemy/i });
+    expect(link).toHaveAttribute('href', expect.stringContaining('udemy.com/courses/search'));
+  });
+
+  it('accepts valid direct URLs for each platform', () => {
+    const cases: { platform: Course['platform']; url: string }[] = [
+      { platform: 'youtube', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },
+      { platform: 'coursera', url: 'https://www.coursera.org/learn/machine-learning' },
+      { platform: 'linkedin', url: 'https://www.linkedin.com/learning/javascript-essential-training' },
+      { platform: 'pluralsight', url: 'https://www.pluralsight.com/courses/javascript-getting-started' },
+      { platform: 'aim', url: 'https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials' },
+    ];
+    for (const { platform, url } of cases) {
+      const course = { ...mockCourse, platform, url };
+      const { unmount } = render(<CourseCard course={course} />);
+      const link = screen.getByRole('link', { name: new RegExp(`find.*on ${platform}`, 'i') });
+      expect(link).toHaveAttribute('href', url);
+      unmount();
+    }
+  });
 });

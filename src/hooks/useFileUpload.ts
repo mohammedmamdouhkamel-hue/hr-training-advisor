@@ -44,7 +44,7 @@ export function useFileUpload(callbacks: UseFileUploadCallbacks) {
       rows = rows.map(row => {
         const clean: Record<string, string> = {};
         for (const [k, v] of Object.entries(row)) {
-          clean[k] = sanitizeEmployeeData(v);
+          clean[k] = sanitizeEmployeeData(String(v));
         }
         return clean;
       });

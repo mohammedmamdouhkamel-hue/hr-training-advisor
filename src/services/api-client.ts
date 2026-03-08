@@ -35,6 +35,18 @@ ${assignments}
 - NEVER repeat a platform across the entire plan
 - Use all 6 platforms: youtube, coursera, udemy, pluralsight, aim, linkedin
 
+CRITICAL — COURSE URL REQUIREMENTS:
+You MUST recommend REAL courses that actually exist on each platform. For every course, provide:
+- "url": the DIRECT link to the specific course page (NOT a search page). Use these URL formats:
+  * YouTube: "https://www.youtube.com/watch?v=VIDEO_ID" or "https://www.youtube.com/playlist?list=PLAYLIST_ID"
+  * Coursera: "https://www.coursera.org/learn/COURSE-SLUG" or "https://www.coursera.org/specializations/SLUG"
+  * LinkedIn Learning: "https://www.linkedin.com/learning/COURSE-SLUG"
+  * Udemy: "https://www.udemy.com/course/COURSE-SLUG/"
+  * Pluralsight: "https://www.pluralsight.com/courses/COURSE-SLUG"
+  * AIM/AWS: "https://explore.skillbuilder.aws/learn/course/external/view/elearning/COURSE-ID/COURSE-NAME"
+- "search_query": the exact course title as it appears on the platform (used as fallback if URL is wrong)
+- Only recommend courses you are confident actually exist. Use well-known, popular courses.
+
 Respond ONLY with raw JSON (no markdown, no backticks, no preamble):
 {
   "summary": "2-3 sentence personalised assessment",
@@ -46,12 +58,13 @@ Respond ONLY with raw JSON (no markdown, no backticks, no preamble):
       "target_score": 0,
       "courses": [
         {
-          "title": "specific real course title",
+          "title": "exact course title as it appears on the platform",
           "platform": "platform_as_assigned",
           "duration": "X hours",
           "level": "Beginner|Intermediate|Advanced",
           "description": "one sentence on why this addresses the gap",
-          "search_query": "search query to find this on the platform"
+          "search_query": "exact course title for platform search",
+          "url": "direct URL to the specific course page"
         }
       ]
     }

@@ -10,12 +10,3 @@ export const PLATFORMS: Record<PlatformKey, PlatformConfig> = {
 };
 
 export const PLATFORM_KEYS: PlatformKey[] = ['youtube', 'coursera', 'udemy', 'pluralsight', 'aim', 'linkedin'];
-
-export const PLATFORM_SEARCH_URLS: Record<PlatformKey, (query: string) => string> = {
-  youtube:     (q) => `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`,
-  linkedin:    (q) => `https://www.linkedin.com/learning/search?keywords=${encodeURIComponent(q)}`,
-  coursera:    (q) => `https://www.coursera.org/search?query=${encodeURIComponent(q)}`,
-  udemy:       (q) => `https://www.udemy.com/courses/search/?q=${encodeURIComponent(q)}`,
-  pluralsight: (q) => `https://www.pluralsight.com/search?q=${encodeURIComponent(q)}`,
-  aim:         (q) => `https://www.google.com/search?q=site:explore.skillbuilder.aws+${encodeURIComponent(q)}`,
-};

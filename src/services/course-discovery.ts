@@ -2,37 +2,35 @@
  * Course Discovery Service
  *
  * Generates deep-link search URLs for training platforms.
- * Each platform is mapped to the most effective search strategy:
- *   - Native platform search when available (YouTube, Coursera, Udemy, LinkedIn Learning)
- *   - Site-scoped Google search for platforms without good public search (Pluralsight, AWS Skill Builder / AIM)
- *   - Generic Google search as a fallback for unrecognized platforms
+ * All platforms use native search URLs for direct results without a Google intermediary.
+ * Falls back to generic Google search for unrecognized platforms.
  */
 
 /** URL builder keyed by normalized platform name. */
 const PLATFORM_URL_BUILDERS: Record<string, (query: string) => string> = {
-  // YouTube – site-scoped Google search adds "+tutorial" for higher-quality hits
+  // YouTube – native search results page
   youtube: (q) =>
-    `https://www.google.com/search?q=site:youtube.com+${encodeURIComponent(q)}+tutorial`,
+    `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`,
 
-  // Coursera – native public search
+  // Coursera – native course search
   coursera: (q) =>
     `https://www.coursera.org/search?query=${encodeURIComponent(q)}`,
 
-  // LinkedIn Learning – site-scoped Google search (no public API)
+  // LinkedIn Learning – native search
   linkedin: (q) =>
-    `https://www.google.com/search?q=site:linkedin.com/learning+${encodeURIComponent(q)}`,
+    `https://www.linkedin.com/learning/search?keywords=${encodeURIComponent(q)}`,
 
   // Udemy – native course search
   udemy: (q) =>
     `https://www.udemy.com/courses/search/?q=${encodeURIComponent(q)}`,
 
-  // Pluralsight – site-scoped Google search targeting /courses paths
+  // Pluralsight – native search
   pluralsight: (q) =>
-    `https://www.google.com/search?q=site:pluralsight.com/courses+${encodeURIComponent(q)}`,
+    `https://www.pluralsight.com/search?q=${encodeURIComponent(q)}`,
 
-  // AIM / AWS Skill Builder – site-scoped Google search
+  // AIM / AWS Skill Builder – native catalog search
   aim: (q) =>
-    `https://www.google.com/search?q=site:explore.skillbuilder.aws+${encodeURIComponent(q)}`,
+    `https://explore.skillbuilder.aws/en/catalog?searchText=${encodeURIComponent(q)}`,
 };
 
 /**

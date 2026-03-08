@@ -270,7 +270,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
       {hover && (
         <div style={{
           position: 'absolute',
-          top: 10,
+          bottom: 10,
           right: 10,
           display: 'flex',
           gap: 4,

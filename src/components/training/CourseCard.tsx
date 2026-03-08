@@ -8,8 +8,39 @@ interface CourseCardProps {
   course: Course;
 }
 
+/**
+ * Expected hostname patterns per platform.
+ * A URL is only accepted if it matches the expected platform domain AND
+ * contains a course-specific path segment (not just a search/home page).
+ */
+const PLATFORM_URL_PATTERNS: Record<string, { host: string; pathHint: RegExp }> = {
+  youtube:     { host: 'youtube.com',              pathHint: /\/(watch|playlist)\?/ },
+  coursera:    { host: 'coursera.org',             pathHint: /\/(learn|specializations|professional-certificates)\// },
+  linkedin:    { host: 'linkedin.com',             pathHint: /\/learning\/.+/ },
+  udemy:       { host: 'udemy.com',                pathHint: /\/course\/.+/ },
+  pluralsight: { host: 'pluralsight.com',          pathHint: /\/courses?\/.+/ },
+  aim:         { host: 'explore.skillbuilder.aws', pathHint: /\/learn\/course\// },
+};
+
+/** Validate that a URL is a real direct course link for the given platform. */
+function isValidCourseUrl(url: string | undefined, platform: string): url is string {
+  if (!url) return false;
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:') return false;
+    const pattern = PLATFORM_URL_PATTERNS[platform.toLowerCase()];
+    if (!pattern) return false;
+    if (!parsed.hostname.endsWith(pattern.host)) return false;
+    return pattern.pathHint.test(parsed.pathname + parsed.search);
+  } catch {
+    return false;
+  }
+}
+
 export default memo(function CourseCard({ course }: CourseCardProps) {
-  const url = getCourseSearchUrl(course.platform, course.search_query || course.title);
+  const url = isValidCourseUrl(course.url, course.platform)
+    ? course.url
+    : getCourseSearchUrl(course.platform, course.search_query || course.title);
 
   return (
     <div style={{ background: 'var(--surface-card)', border: '1px solid var(--surface-border)', borderRadius: 10, padding: '14px 16px', marginBottom: 10 }}>
