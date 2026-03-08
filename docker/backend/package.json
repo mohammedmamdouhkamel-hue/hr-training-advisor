@@ -1,0 +1,22 @@
+{
+  "name": "hr-training-advisor-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Express proxy for Anthropic API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "morgan": "^1.10.0",
+    "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

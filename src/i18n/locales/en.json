@@ -1,0 +1,121 @@
+{
+  "header": {
+    "title": "HR Training Advisor",
+    "subtitle": "Powered by AI · SuccessFactors Integration",
+    "apiKey": "API Key",
+    "changeKey": "Change API key",
+    "uploadNew": "← Upload New",
+    "uploadNewLabel": "Upload New",
+    "analytics": "Analytics",
+    "generateAll": "⚡ Generate All Plans",
+    "generateAllLabel": "Generate All Plans",
+    "generating": "Generating..."
+  },
+  "upload": {
+    "heading": "Performance-Driven Training",
+    "description": "Upload SuccessFactors performance data to generate AI-powered, personalised training roadmaps.",
+    "dropzone": "Drop your file here",
+    "supportedFormats": "Supports .xlsx, .xls and .csv · SAP SuccessFactors export ready",
+    "chooseFile": "Choose File",
+    "noFileYet": "No file yet?",
+    "loadSample": "Load sample data",
+    "supportedPlatforms": "Supported Training Platforms"
+  },
+  "sidebar": {
+    "searchPlaceholder": "Search employees...",
+    "employees": "Employees",
+    "employees_one": "{{count}} Employee",
+    "employees_other": "{{count}} Employees",
+    "needsFocus": "Needs Focus",
+    "developing": "Developing",
+    "strong": "Strong",
+    "plansReady": "Plans Ready",
+    "planReady": "✓ Plan Ready",
+    "all": "All",
+    "noMatch": "No employees match your search"
+  },
+  "mainPanel": {
+    "selectEmployee": "Select an employee",
+    "selectEmployeeHint": "Click any card to instantly generate their AI training plan"
+  },
+  "trainingPlan": {
+    "aiGenerated": "AI-Generated Training Plan",
+    "tabs": {
+      "overview": "Overview",
+      "trainingPlan": "Training Plan",
+      "milestones": "Milestones"
+    },
+    "priorityFocusAreas": "Priority Focus Areas",
+    "competencyScores": "Competency Scores",
+    "recommendedCourses": "Recommended Courses",
+    "find": "Find →",
+    "currentScore": "Current",
+    "targetScore": "Target"
+  },
+  "apiKeyModal": {
+    "title": "Enter your Anthropic API Key",
+    "description": "Your key is stored only in memory for this session — never saved to disk or sent anywhere except Anthropic's API.",
+    "placeholder": "sk-ant-api03-...",
+    "startSession": "Start Session →",
+    "getKeyAt": "Get your key at",
+    "showKey": "Show API key",
+    "hideKey": "Hide API key"
+  },
+  "errors": {
+    "somethingWentWrong": "Something went wrong",
+    "tryAgain": "Try Again",
+    "retry": "Retry",
+    "errorGeneratingPlan": "⚠️ Error generating plan",
+    "invalidApiKey": "Invalid API key. Get a new one at console.anthropic.com",
+    "rateLimitReached": "Rate limit reached. Wait 30 seconds and try again.",
+    "serversUnavailable": "Anthropic servers temporarily unavailable. Try again in a moment.",
+    "apiError": "API error {{status}}",
+    "checkConnection": "Check your internet connection and try again.",
+    "unexpectedFormat": "AI returned unexpected format. Try generating again.",
+    "unexpectedError": "An unexpected error occurred.",
+    "unsupportedFormat": "Unsupported format. Please upload .xlsx, .xls, or .csv.",
+    "fileEmpty": "File appears empty.",
+    "fileTooLarge": "File too large ({{size}}MB). Maximum size is 10MB.",
+    "tooManyEmployees": "Too many employees ({{count}}). Maximum is {{max}}.",
+    "noEmployeeRows": "Could not detect employee rows.",
+    "noCompetencyScores": "No competency scores found. Columns: {{columns}}",
+    "tooManyRequests": "Too many requests. Please wait {{seconds}} seconds before generating another plan."
+  },
+  "loading": {
+    "analyzing": "Analysing {{name}}'s performance data...",
+    "searchingPlatforms": "Searching LinkedIn, YouTube, Coursera & more...",
+    "buildingRoadmap": "Building personalised 90-day roadmap...",
+    "processing": "Processing {{name}} ({{current}}/{{total}})...",
+    "aiCurating": "AI is curating courses from 6 platforms"
+  },
+  "analytics": {
+    "scoreDistribution": "Score Distribution",
+    "departmentComparison": "Department Comparison",
+    "competencyOverview": "Competency Overview",
+    "averageScore": "Average Score",
+    "topPerformers": "Top Performers",
+    "needsImprovement": "Needs Improvement"
+  },
+  "export": {
+    "export": "Export",
+    "exportPdf": "Export PDF",
+    "exportExcel": "Export Excel",
+    "exportAll": "Export All Plans",
+    "exportAllPdf": "Export All (PDF)",
+    "exportAllExcel": "Export All (Excel)",
+    "currentEmployee": "Current Employee",
+    "allEmployees": "All Employees",
+    "downloading": "Downloading..."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "score": "/ 100",
+    "of": "of"
+  }
+}

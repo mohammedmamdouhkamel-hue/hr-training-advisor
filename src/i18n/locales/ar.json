@@ -1,0 +1,121 @@
+{
+  "header": {
+    "title": "مستشار التدريب للموارد البشرية",
+    "subtitle": "مدعوم بالذكاء الاصطناعي · تكامل SuccessFactors",
+    "apiKey": "مفتاح API",
+    "changeKey": "تغيير المفتاح",
+    "uploadNew": "رفع جديد →",
+    "uploadNewLabel": "رفع جديد",
+    "analytics": "التحليلات",
+    "generateAll": "⚡ إنشاء جميع الخطط",
+    "generateAllLabel": "إنشاء جميع الخطط",
+    "generating": "جارٍ الإنشاء..."
+  },
+  "upload": {
+    "heading": "تدريب مبني على الأداء",
+    "description": "ارفع بيانات الأداء من SuccessFactors لإنشاء خطط تدريب مخصصة مدعومة بالذكاء الاصطناعي.",
+    "dropzone": "أسقط ملفك هنا",
+    "supportedFormats": "يدعم .xlsx و .xls و .csv · جاهز لتصدير SAP SuccessFactors",
+    "chooseFile": "اختر ملفاً",
+    "noFileYet": "لا يوجد ملف بعد؟",
+    "loadSample": "تحميل بيانات تجريبية",
+    "supportedPlatforms": "منصات التدريب المدعومة"
+  },
+  "sidebar": {
+    "searchPlaceholder": "البحث عن موظفين...",
+    "employees": "موظفون",
+    "employees_one": "{{count}} موظف",
+    "employees_other": "{{count}} موظفين",
+    "needsFocus": "يحتاج تركيز",
+    "developing": "قيد التطوير",
+    "strong": "أداء قوي",
+    "plansReady": "خطط جاهزة",
+    "planReady": "✓ الخطة جاهزة",
+    "all": "الكل",
+    "noMatch": "لا يوجد موظفون مطابقون لبحثك"
+  },
+  "mainPanel": {
+    "selectEmployee": "اختر موظفاً",
+    "selectEmployeeHint": "انقر على أي بطاقة لإنشاء خطة تدريب بالذكاء الاصطناعي فوراً"
+  },
+  "trainingPlan": {
+    "aiGenerated": "خطة تدريب مُنشأة بالذكاء الاصطناعي",
+    "tabs": {
+      "overview": "نظرة عامة",
+      "trainingPlan": "خطة التدريب",
+      "milestones": "المراحل الرئيسية"
+    },
+    "priorityFocusAreas": "مجالات التركيز ذات الأولوية",
+    "competencyScores": "درجات الكفاءات",
+    "recommendedCourses": "الدورات الموصى بها",
+    "find": "← بحث",
+    "currentScore": "الحالي",
+    "targetScore": "المستهدف"
+  },
+  "apiKeyModal": {
+    "title": "أدخل مفتاح Anthropic API الخاص بك",
+    "description": "يتم تخزين مفتاحك في الذاكرة فقط لهذه الجلسة — لا يتم حفظه على القرص أو إرساله لأي مكان سوى واجهة Anthropic.",
+    "placeholder": "sk-ant-api03-...",
+    "startSession": "← بدء الجلسة",
+    "getKeyAt": "احصل على مفتاحك من",
+    "showKey": "إظهار المفتاح",
+    "hideKey": "إخفاء المفتاح"
+  },
+  "errors": {
+    "somethingWentWrong": "حدث خطأ ما",
+    "tryAgain": "حاول مرة أخرى",
+    "retry": "إعادة المحاولة",
+    "errorGeneratingPlan": "⚠️ خطأ في إنشاء الخطة",
+    "invalidApiKey": "مفتاح API غير صالح. احصل على مفتاح جديد من console.anthropic.com",
+    "rateLimitReached": "تم الوصول لحد الطلبات. انتظر 30 ثانية وحاول مرة أخرى.",
+    "serversUnavailable": "خوادم Anthropic غير متاحة مؤقتاً. حاول مرة أخرى بعد قليل.",
+    "apiError": "خطأ في API {{status}}",
+    "checkConnection": "تحقق من اتصالك بالإنترنت وحاول مرة أخرى.",
+    "unexpectedFormat": "أرجع الذكاء الاصطناعي تنسيقاً غير متوقع. حاول الإنشاء مرة أخرى.",
+    "unexpectedError": "حدث خطأ غير متوقع.",
+    "unsupportedFormat": "تنسيق غير مدعوم. يرجى رفع ملف .xlsx أو .xls أو .csv.",
+    "fileEmpty": "يبدو أن الملف فارغ.",
+    "fileTooLarge": "الملف كبير جداً ({{size}} ميغابايت). الحد الأقصى 10 ميغابايت.",
+    "tooManyEmployees": "عدد كبير جداً من الموظفين ({{count}}). الحد الأقصى {{max}}.",
+    "noEmployeeRows": "تعذر اكتشاف صفوف الموظفين.",
+    "noCompetencyScores": "لم يتم العثور على درجات الكفاءات. الأعمدة: {{columns}}",
+    "tooManyRequests": "طلبات كثيرة جداً. يرجى الانتظار {{seconds}} ثانية قبل إنشاء خطة أخرى."
+  },
+  "loading": {
+    "analyzing": "جارٍ تحليل بيانات أداء {{name}}...",
+    "searchingPlatforms": "البحث في LinkedIn و YouTube و Coursera والمزيد...",
+    "buildingRoadmap": "بناء خطة مخصصة لـ 90 يوماً...",
+    "processing": "معالجة {{name}} ({{current}}/{{total}})...",
+    "aiCurating": "الذكاء الاصطناعي يختار الدورات من 6 منصات"
+  },
+  "analytics": {
+    "scoreDistribution": "توزيع الدرجات",
+    "departmentComparison": "مقارنة الأقسام",
+    "competencyOverview": "نظرة عامة على الكفاءات",
+    "averageScore": "متوسط الدرجات",
+    "topPerformers": "أفضل المؤدين",
+    "needsImprovement": "يحتاج تحسين"
+  },
+  "export": {
+    "export": "تصدير",
+    "exportPdf": "تصدير PDF",
+    "exportExcel": "تصدير Excel",
+    "exportAll": "تصدير جميع الخطط",
+    "exportAllPdf": "تصدير الكل (PDF)",
+    "exportAllExcel": "تصدير الكل (Excel)",
+    "currentEmployee": "الموظف الحالي",
+    "allEmployees": "جميع الموظفين",
+    "downloading": "جارٍ التحميل..."
+  },
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "error": "خطأ",
+    "close": "إغلاق",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "darkMode": "الوضع الداكن",
+    "lightMode": "الوضع الفاتح",
+    "score": "/ 100",
+    "of": "من"
+  }
+}

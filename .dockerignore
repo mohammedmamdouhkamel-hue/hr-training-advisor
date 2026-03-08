@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+docker/backend/node_modules/
+
+# Build output
+dist/
+
+# Version control
+.git/
+.gitignore
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+
+# IDE and editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test and coverage
+coverage/
+*.test.ts
+*.test.tsx
+
+# Documentation and diagrams
+*.md
+*.mermaid
+*.excalidraw
+
+# Docker (avoid recursive context)
+docker-compose*.yml
+
+# Misc
+npm-debug.log*
+.claude/
