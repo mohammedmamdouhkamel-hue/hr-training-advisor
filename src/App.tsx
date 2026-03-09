@@ -66,7 +66,7 @@ export default function HRTrainingAdvisor() {
 
   return (
     <ErrorBoundary>
-      <div style={{ fontFamily: "'DM Sans', system-ui, sans-serif", background: 'var(--surface-bg)', minHeight: '100vh', color: 'var(--text-primary)' }}>
+      <div style={{ fontFamily: 'var(--font-sans)', background: 'var(--surface-bg)', minHeight: '100vh', color: 'var(--text-primary)' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <Toaster position="bottom-right" theme={theme} />
         {!apiKey && <ApiKeyModal onSave={setApiKey} />}

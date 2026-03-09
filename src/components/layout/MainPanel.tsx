@@ -32,9 +32,23 @@ export default function MainPanel({ selected, loading, loadingMsg, error, plans,
     <main className="app-main" role="main" style={{ flex: 1, overflowY: 'auto', padding: '28px 32px' }}>
       {!selected && (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-          <Users size={64} color="var(--text-subtle)" strokeWidth={1} style={{ marginBottom: 16 }} />
-          <div style={{ fontSize: 18, fontWeight: 600, color: 'var(--text-subtle)' }}>{t('mainPanel.selectEmployee')}</div>
-          <div style={{ fontSize: 13, marginTop: 6, color: 'var(--text-subtle)' }}>{t('mainPanel.selectEmployeeHint')}</div>
+          {/* Workspace image from Unsplash (Photo by Vitaly Gariev) */}
+          <div style={{
+            width: 200, height: 140, borderRadius: 16, overflow: 'hidden',
+            marginBottom: 24, boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
+            border: '1px solid var(--surface-border)',
+          }}>
+            <img
+              src={`${import.meta.env.BASE_URL}images/workspace.jpg`}
+              alt="Professional workspace"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.85 }}
+            />
+          </div>
+          <div style={{ width: 52, height: 52, borderRadius: 14, background: 'var(--color-primary-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+            <Users size={24} color="var(--color-primary)" strokeWidth={1.5} />
+          </div>
+          <div style={{ fontSize: 'var(--text-lg)', fontWeight: 600, color: 'var(--text-secondary)' }}>{t('mainPanel.selectEmployee')}</div>
+          <div style={{ fontSize: 'var(--text-base)', marginTop: 6, color: 'var(--text-muted)' }}>{t('mainPanel.selectEmployeeHint')}</div>
         </div>
       )}
       {selected && loading && (

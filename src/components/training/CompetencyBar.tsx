@@ -10,7 +10,7 @@ export default memo(function CompetencyBar({ name, score }: CompetencyBarProps) 
   const color = getScoreColor(score);
   return (
     <div style={{ marginBottom: 10 }} role="meter" aria-label={`${name} score`} aria-valuenow={score} aria-valuemin={0} aria-valuemax={100}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4, fontSize: 12 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4, fontSize: 'var(--text-xs)' }}>
         <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{name}</span>
         <span style={{ color, fontWeight: 700 }}>{score}</span>
       </div>

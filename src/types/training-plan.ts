@@ -7,7 +7,6 @@ export interface Course {
   level: 'Beginner' | 'Intermediate' | 'Advanced';
   description: string;
   search_query: string;
-  url?: string;
 }
 
 export interface TrainingArea {

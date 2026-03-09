@@ -19,9 +19,9 @@ export default function AnalyticsDashboard({ employees, plans }: AnalyticsDashbo
           alignItems: 'center',
           justifyContent: 'center',
           minHeight: 400,
-          color: '#94A3B8',
+          color: 'var(--text-muted)',
           fontSize: 14,
-          fontFamily: "'DM Sans', system-ui, sans-serif",
+          fontFamily: 'var(--font-sans)',
         }}
       >
         Upload employee data to view analytics
@@ -30,7 +30,7 @@ export default function AnalyticsDashboard({ employees, plans }: AnalyticsDashbo
   }
 
   return (
-    <div style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}>
+    <div style={{ fontFamily: 'var(--font-sans)' }}>
       <div
         style={{
           display: 'flex',
@@ -45,7 +45,7 @@ export default function AnalyticsDashboard({ employees, plans }: AnalyticsDashbo
               margin: 0,
               fontSize: 20,
               fontWeight: 800,
-              color: '#0F172A',
+              color: 'var(--color-primary-950)',
             }}
           >
             Analytics
@@ -54,7 +54,7 @@ export default function AnalyticsDashboard({ employees, plans }: AnalyticsDashbo
             style={{
               margin: '4px 0 0 0',
               fontSize: 13,
-              color: '#64748B',
+              color: 'var(--text-muted)',
             }}
           >
             Overview of {employees.length} employees across all departments
@@ -105,7 +105,7 @@ function SummaryBadge({ label, value }: { label: string; value: string }) {
   return (
     <div
       style={{
-        background: '#F1F5F9',
+        background: 'var(--color-gray-100)',
         borderRadius: 10,
         padding: '8px 16px',
         textAlign: 'center',
@@ -115,7 +115,7 @@ function SummaryBadge({ label, value }: { label: string; value: string }) {
         style={{
           fontSize: 18,
           fontWeight: 800,
-          color: '#0F172A',
+          color: 'var(--color-primary-950)',
         }}
       >
         {value}
@@ -123,7 +123,7 @@ function SummaryBadge({ label, value }: { label: string; value: string }) {
       <div
         style={{
           fontSize: 10,
-          color: '#64748B',
+          color: 'var(--text-muted)',
           fontWeight: 600,
           textTransform: 'uppercase',
           letterSpacing: '0.04em',

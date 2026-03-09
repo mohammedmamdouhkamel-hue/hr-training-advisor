@@ -30,9 +30,9 @@ const RANGES: { label: string; min: number; max: number }[] = [
 ];
 
 function getBucketColor(min: number): string {
-  if (min >= 80) return '#10B981';
-  if (min >= 65) return '#F59E0B';
-  return '#EF4444';
+  if (min >= 80) return '#059669';
+  if (min >= 65) return '#D97706';
+  return '#DC2626';
 }
 
 export default function ScoreDistribution({ employees }: ScoreDistributionProps) {
@@ -45,9 +45,9 @@ export default function ScoreDistribution({ employees }: ScoreDistributionProps)
   return (
     <div
       style={{
-        background: '#FFFFFF',
-        borderRadius: 14,
-        border: '1px solid #E2E8F0',
+        background: 'var(--surface-card)',
+        borderRadius: 10,
+        border: '1px solid var(--surface-border)',
         padding: 24,
         boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
       }}
@@ -57,38 +57,38 @@ export default function ScoreDistribution({ employees }: ScoreDistributionProps)
           margin: '0 0 20px 0',
           fontSize: 15,
           fontWeight: 700,
-          color: '#0F172A',
-          fontFamily: "'DM Sans', system-ui, sans-serif",
+          color: 'var(--color-primary-950)',
+          fontFamily: 'var(--font-sans)',
         }}
       >
         Score Distribution
       </h3>
       <ResponsiveContainer width="100%" height={260}>
         <BarChart data={data} margin={{ top: 4, right: 12, left: -8, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--surface-border)" vertical={false} />
           <XAxis
             dataKey="range"
-            tick={{ fontSize: 11, fill: '#64748B' }}
-            axisLine={{ stroke: '#E2E8F0' }}
+            tick={{ fontSize: 11, fill: 'var(--text-muted)' }}
+            axisLine={{ stroke: 'var(--surface-border)' }}
             tickLine={false}
           />
           <YAxis
             allowDecimals={false}
-            tick={{ fontSize: 11, fill: '#64748B' }}
+            tick={{ fontSize: 11, fill: 'var(--text-muted)' }}
             axisLine={false}
             tickLine={false}
           />
           <Tooltip
             contentStyle={{
-              background: '#0F172A',
+              background: 'var(--color-primary-950)',
               border: 'none',
               borderRadius: 8,
               color: '#FFFFFF',
               fontSize: 12,
-              fontFamily: "'DM Sans', system-ui, sans-serif",
+              fontFamily: 'var(--font-sans)',
             }}
             itemStyle={{ color: '#FFFFFF' }}
-            labelStyle={{ color: '#94A3B8', fontWeight: 600 }}
+            labelStyle={{ color: 'var(--text-muted)', fontWeight: 600 }}
             formatter={(value) => [`${value} employees`, 'Count']}
           />
           <Bar dataKey="count" radius={[6, 6, 0, 0]} maxBarSize={48}>

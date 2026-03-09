@@ -27,10 +27,10 @@ export default class ErrorBoundary extends Component<Props, State> {
       if (this.props.fallback) return this.props.fallback;
       return (
         <div style={{ padding: 40, textAlign: 'center' }}>
-          <div style={{ fontSize: 18, fontWeight: 700, color: '#BE123C', marginBottom: 8 }}>Something went wrong</div>
-          <div style={{ fontSize: 13, color: '#64748B', marginBottom: 16 }}>{this.state.error?.message}</div>
+          <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-danger)', marginBottom: 8 }}>Something went wrong</div>
+          <div style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 16 }}>{this.state.error?.message}</div>
           <button onClick={() => this.setState({ hasError: false, error: null })}
-            style={{ background: '#0F172A', color: '#fff', border: 'none', padding: '8px 18px', borderRadius: 8, cursor: 'pointer', fontWeight: 600, fontSize: 13 }}>
+            style={{ background: 'var(--color-primary)', color: '#fff', border: 'none', padding: '8px 18px', borderRadius: 8, cursor: 'pointer', fontWeight: 600, fontSize: 13 }}>
             Try Again
           </button>
         </div>

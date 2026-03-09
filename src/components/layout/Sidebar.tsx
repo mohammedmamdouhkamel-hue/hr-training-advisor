@@ -55,16 +55,18 @@ export default function Sidebar({ employees, selected, plans, uploadedFile, onSe
           <FolderOpen size={12} /> {uploadedFile}
         </div>
         <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--text-primary)' }}>{t('sidebar.employees_other', { count: employees.length })}</div>
-        <div style={{ display: 'flex', gap: 12, marginTop: 10 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginTop: 12 }}>
           {([
-            ['#EF4444', counts.needsFocus, t('sidebar.needsFocus')],
-            ['#F59E0B', counts.developing, t('sidebar.developing')],
-            ['#10B981', counts.strong, t('sidebar.strong')],
-            ['#3B82F6', counts.plans, t('sidebar.plansReady')],
-          ] as const).map(([color, count, label]) => (
-            <div key={label} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 18, fontWeight: 800, color }}>{count}</div>
-              <div style={{ fontSize: 10, color: 'var(--text-subtle)' }}>{label}</div>
+            ['var(--color-danger)', 'rgba(220, 38, 38, 0.08)', counts.needsFocus, t('sidebar.needsFocus')],
+            ['var(--color-warning)', 'rgba(217, 119, 6, 0.08)', counts.developing, t('sidebar.developing')],
+            ['var(--color-success)', 'rgba(5, 150, 105, 0.08)', counts.strong, t('sidebar.strong')],
+            ['var(--color-primary)', 'rgba(79, 70, 229, 0.08)', counts.plans, t('sidebar.plansReady')],
+          ] as const).map(([color, bg, count, label]) => (
+            <div key={label} className="stat-badge" style={{
+              textAlign: 'center', background: bg, borderRadius: 10, padding: '8px 4px',
+            }}>
+              <div style={{ fontSize: 20, fontWeight: 800, color }}>{count}</div>
+              <div style={{ fontSize: 9, color, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.03em' }}>{label}</div>
             </div>
           ))}
         </div>
@@ -110,19 +112,19 @@ export default function Sidebar({ employees, selected, plans, uploadedFile, onSe
           </div>
         )}
         {needsFocus.length > 0 && <>
-          <div style={{ fontSize: 10, fontWeight: 700, color: '#EF4444', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 4 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--color-danger)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 4 }}>
             <AlertTriangle size={12} /> {t('sidebar.needsFocus')}
           </div>
           {needsFocus.map(e => <EmployeeCard key={e.name} emp={e} onSelect={onSelect} isSelected={selected?.name === e.name} hasPlan={!!plans[e.name]} />)}
         </>}
         {developing.length > 0 && <>
-          <div style={{ fontSize: 10, fontWeight: 700, color: '#F59E0B', textTransform: 'uppercase', letterSpacing: 1, margin: '16px 0 8px', display: 'flex', alignItems: 'center', gap: 4 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--color-warning)', textTransform: 'uppercase', letterSpacing: 1, margin: '16px 0 8px', display: 'flex', alignItems: 'center', gap: 4 }}>
             <TrendingUp size={12} /> {t('sidebar.developing')}
           </div>
           {developing.map(e => <EmployeeCard key={e.name} emp={e} onSelect={onSelect} isSelected={selected?.name === e.name} hasPlan={!!plans[e.name]} />)}
         </>}
         {strong.length > 0 && <>
-          <div style={{ fontSize: 10, fontWeight: 700, color: '#10B981', textTransform: 'uppercase', letterSpacing: 1, margin: '16px 0 8px', display: 'flex', alignItems: 'center', gap: 4 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--color-success)', textTransform: 'uppercase', letterSpacing: 1, margin: '16px 0 8px', display: 'flex', alignItems: 'center', gap: 4 }}>
             <Award size={12} /> {t('sidebar.strong')}
           </div>
           {strong.map(e => <EmployeeCard key={e.name} emp={e} onSelect={onSelect} isSelected={selected?.name === e.name} hasPlan={!!plans[e.name]} />)}

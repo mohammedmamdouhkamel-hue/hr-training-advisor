@@ -66,7 +66,7 @@ export default function ExportButton({ employee, plan, allEmployees, allPlans }:
           display: 'flex',
           alignItems: 'center',
           gap: 6,
-          background: 'linear-gradient(135deg, #3B82F6, #8B5CF6)',
+          background: 'var(--gradient-brand)',
           border: 'none',
           color: '#fff',
           padding: '8px 16px',
@@ -101,9 +101,9 @@ export default function ExportButton({ employee, plan, allEmployees, allPlans }:
             position: 'absolute',
             top: 'calc(100% + 6px)',
             right: 0,
-            background: '#fff',
-            border: '1px solid #E2E8F0',
-            borderRadius: 12,
+            background: 'var(--surface-card)',
+            border: '1px solid var(--surface-border)',
+            borderRadius: 10,
             boxShadow: '0 10px 40px rgba(0,0,0,0.12)',
             minWidth: 220,
             zIndex: 1000,
@@ -116,7 +116,7 @@ export default function ExportButton({ employee, plan, allEmployees, allPlans }:
               padding: '10px 14px 6px',
               fontSize: 10,
               fontWeight: 700,
-              color: '#94A3B8',
+              color: 'var(--text-muted)',
               textTransform: 'uppercase',
               letterSpacing: 0.8,
             }}
@@ -133,7 +133,7 @@ export default function ExportButton({ employee, plan, allEmployees, allPlans }:
               <div
                 style={{
                   height: 1,
-                  background: '#E2E8F0',
+                  background: 'var(--surface-border)',
                   margin: '4px 0',
                 }}
               />
@@ -142,7 +142,7 @@ export default function ExportButton({ employee, plan, allEmployees, allPlans }:
                   padding: '10px 14px 6px',
                   fontSize: 10,
                   fontWeight: 700,
-                  color: '#94A3B8',
+                  color: 'var(--text-muted)',
                   textTransform: 'uppercase',
                   letterSpacing: 0.8,
                 }}
@@ -194,14 +194,14 @@ function MenuItem({
         cursor: 'pointer',
         fontSize: 13,
         fontWeight: 500,
-        color: '#1E293B',
+        color: 'var(--text-primary)',
         textAlign: 'left',
         transition: 'background 0.15s',
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = '#F1F5F9')}
+      onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--color-gray-100)')}
       onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
     >
-      <span style={{ color: '#64748B', display: 'flex', alignItems: 'center' }}>{icon}</span>
+      <span style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center' }}>{icon}</span>
       {label}
     </button>
   );

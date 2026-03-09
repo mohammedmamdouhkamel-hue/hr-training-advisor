@@ -11,15 +11,15 @@ interface CompetencyRow {
 }
 
 function getCellColor(score: number): string {
-  if (score >= 80) return '#10B981';
-  if (score >= 65) return '#F59E0B';
-  return '#EF4444';
+  if (score >= 80) return '#059669';
+  if (score >= 65) return '#D97706';
+  return '#DC2626';
 }
 
 function getCellBg(score: number): string {
-  if (score >= 80) return 'rgba(16, 185, 129, 0.12)';
-  if (score >= 65) return 'rgba(245, 158, 11, 0.12)';
-  return 'rgba(239, 68, 68, 0.12)';
+  if (score >= 80) return 'rgba(5, 150, 105, 0.12)';
+  if (score >= 65) return 'rgba(217, 119, 6, 0.12)';
+  return 'rgba(220, 38, 38, 0.12)';
 }
 
 export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps) {
@@ -54,9 +54,9 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
   return (
     <div
       style={{
-        background: '#FFFFFF',
-        borderRadius: 14,
-        border: '1px solid #E2E8F0',
+        background: 'var(--surface-card)',
+        borderRadius: 10,
+        border: '1px solid var(--surface-border)',
         padding: 24,
         boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
       }}
@@ -66,8 +66,8 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
           margin: '0 0 20px 0',
           fontSize: 15,
           fontWeight: 700,
-          color: '#0F172A',
-          fontFamily: "'DM Sans', system-ui, sans-serif",
+          color: 'var(--color-primary-950)',
+          fontFamily: 'var(--font-sans)',
         }}
       >
         Competency Overview
@@ -77,7 +77,7 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
           style={{
             width: '100%',
             borderCollapse: 'collapse',
-            fontFamily: "'DM Sans', system-ui, sans-serif",
+            fontFamily: 'var(--font-sans)',
             fontSize: 12,
           }}
         >
@@ -87,10 +87,10 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
                 style={{
                   textAlign: 'left',
                   padding: '8px 12px',
-                  color: '#64748B',
+                  color: 'var(--text-muted)',
                   fontWeight: 600,
                   fontSize: 11,
-                  borderBottom: '1px solid #E2E8F0',
+                  borderBottom: '1px solid var(--surface-border)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
                 }}
@@ -101,10 +101,10 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
                 style={{
                   textAlign: 'center',
                   padding: '8px 12px',
-                  color: '#64748B',
+                  color: 'var(--text-muted)',
                   fontWeight: 600,
                   fontSize: 11,
-                  borderBottom: '1px solid #E2E8F0',
+                  borderBottom: '1px solid var(--surface-border)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
                 }}
@@ -115,10 +115,10 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
                 style={{
                   textAlign: 'center',
                   padding: '8px 12px',
-                  color: '#64748B',
+                  color: 'var(--text-muted)',
                   fontWeight: 600,
                   fontSize: 11,
-                  borderBottom: '1px solid #E2E8F0',
+                  borderBottom: '1px solid var(--surface-border)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
                 }}
@@ -129,10 +129,10 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
                 style={{
                   textAlign: 'left',
                   padding: '8px 12px',
-                  color: '#64748B',
+                  color: 'var(--text-muted)',
                   fontWeight: 600,
                   fontSize: 11,
-                  borderBottom: '1px solid #E2E8F0',
+                  borderBottom: '1px solid var(--surface-border)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
                   width: '40%',
@@ -148,9 +148,9 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
                 <td
                   style={{
                     padding: '10px 12px',
-                    color: '#1E293B',
+                    color: 'var(--text-primary)',
                     fontWeight: 500,
-                    borderBottom: '1px solid #F1F5F9',
+                    borderBottom: '1px solid var(--color-gray-100)',
                   }}
                 >
                   {row.name}
@@ -159,7 +159,7 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
                   style={{
                     padding: '10px 12px',
                     textAlign: 'center',
-                    borderBottom: '1px solid #F1F5F9',
+                    borderBottom: '1px solid var(--color-gray-100)',
                   }}
                 >
                   <span
@@ -181,8 +181,8 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
                   style={{
                     padding: '10px 12px',
                     textAlign: 'center',
-                    color: '#64748B',
-                    borderBottom: '1px solid #F1F5F9',
+                    color: 'var(--text-muted)',
+                    borderBottom: '1px solid var(--color-gray-100)',
                   }}
                 >
                   {row.count}
@@ -190,7 +190,7 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
                 <td
                   style={{
                     padding: '10px 12px',
-                    borderBottom: '1px solid #F1F5F9',
+                    borderBottom: '1px solid var(--color-gray-100)',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -198,7 +198,7 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
                       style={{
                         flex: 1,
                         height: 8,
-                        background: '#F1F5F9',
+                        background: 'var(--color-gray-100)',
                         borderRadius: 4,
                         overflow: 'hidden',
                       }}
@@ -224,7 +224,7 @@ export default function CompetencyHeatmap({ employees }: CompetencyHeatmapProps)
                   style={{
                     padding: 24,
                     textAlign: 'center',
-                    color: '#94A3B8',
+                    color: 'var(--text-muted)',
                     fontSize: 13,
                   }}
                 >

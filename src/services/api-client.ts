@@ -35,17 +35,10 @@ ${assignments}
 - NEVER repeat a platform across the entire plan
 - Use all 6 platforms: youtube, coursera, udemy, pluralsight, aim, linkedin
 
-CRITICAL — COURSE URL REQUIREMENTS:
-You MUST recommend REAL courses that actually exist on each platform. For every course, provide:
-- "url": the DIRECT link to the specific course page (NOT a search page). Use these URL formats:
-  * YouTube: "https://www.youtube.com/watch?v=VIDEO_ID" or "https://www.youtube.com/playlist?list=PLAYLIST_ID"
-  * Coursera: "https://www.coursera.org/learn/COURSE-SLUG" or "https://www.coursera.org/specializations/SLUG"
-  * LinkedIn Learning: "https://www.linkedin.com/learning/COURSE-SLUG"
-  * Udemy: "https://www.udemy.com/course/COURSE-SLUG/"
-  * Pluralsight: "https://www.pluralsight.com/courses/COURSE-SLUG"
-  * AIM/AWS: "https://explore.skillbuilder.aws/learn/course/external/view/elearning/COURSE-ID/COURSE-NAME"
-- "search_query": the exact course title as it appears on the platform (used as fallback if URL is wrong)
-- Only recommend courses you are confident actually exist. Use well-known, popular courses.
+COURSE REQUIREMENTS:
+- Only recommend REAL, well-known courses that actually exist on each platform
+- "search_query" must be the EXACT course title as it appears on the platform so searching for it returns the course as the top result
+- Do NOT include any "url" field — we generate links automatically from the search_query
 
 Respond ONLY with raw JSON (no markdown, no backticks, no preamble):
 {
@@ -58,13 +51,12 @@ Respond ONLY with raw JSON (no markdown, no backticks, no preamble):
       "target_score": 0,
       "courses": [
         {
-          "title": "exact course title as it appears on the platform",
+          "title": "exact course title as listed on the platform",
           "platform": "platform_as_assigned",
           "duration": "X hours",
           "level": "Beginner|Intermediate|Advanced",
           "description": "one sentence on why this addresses the gap",
-          "search_query": "exact course title for platform search",
-          "url": "direct URL to the specific course page"
+          "search_query": "exact course title for platform search"
         }
       ]
     }
@@ -87,7 +79,7 @@ Respond ONLY with raw JSON (no markdown, no backticks, no preamble):
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 1500,
+      max_tokens: 2000,
       messages: [{ role: 'user', content: prompt }],
     }),
   });
@@ -113,11 +105,13 @@ Respond ONLY with raw JSON (no markdown, no backticks, no preamble):
     throw new Error(getNetworkErrorMessage(e));
   }
 
-  // Enforce platform diversity as safety net
+  // Enforce platform diversity and strip hallucinated URLs as safety net
   const all: PlatformKey[] = [...PLATFORM_KEYS];
   const used = new Set<string>();
   plan.training_plan?.forEach(area => {
     area.courses?.forEach(course => {
+      // Remove any url field — LLMs hallucinate URLs that return 404
+      delete (course as Record<string, unknown>).url;
       if (!all.includes(course.platform as PlatformKey)) course.platform = 'linkedin';
       if (used.has(course.platform)) {
         const alt = all.find(p => !used.has(p));

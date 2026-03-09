@@ -1,7 +1,7 @@
 export function getScoreColor(score: number): string {
-  if (score >= 80) return '#10B981';
-  if (score >= 65) return '#F59E0B';
-  return '#EF4444';
+  if (score >= 80) return 'var(--color-success)';
+  if (score >= 65) return 'var(--color-warning)';
+  return 'var(--color-danger)';
 }
 
 export function getScoreLabel(score: number): string {

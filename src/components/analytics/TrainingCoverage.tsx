@@ -14,8 +14,8 @@ interface CoverageData {
 }
 
 const COLORS = {
-  generated: '#10B981',
-  pending: '#3B82F6',
+  generated: '#059669',
+  pending: '#4F46E5',
 };
 
 export default function TrainingCoverage({ employees, plans }: TrainingCoverageProps) {
@@ -33,9 +33,9 @@ export default function TrainingCoverage({ employees, plans }: TrainingCoverageP
   return (
     <div
       style={{
-        background: '#FFFFFF',
-        borderRadius: 14,
-        border: '1px solid #E2E8F0',
+        background: 'var(--surface-card)',
+        borderRadius: 10,
+        border: '1px solid var(--surface-border)',
         padding: 24,
         boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
       }}
@@ -45,8 +45,8 @@ export default function TrainingCoverage({ employees, plans }: TrainingCoverageP
           margin: '0 0 20px 0',
           fontSize: 15,
           fontWeight: 700,
-          color: '#0F172A',
-          fontFamily: "'DM Sans', system-ui, sans-serif",
+          color: 'var(--color-primary-950)',
+          fontFamily: 'var(--font-sans)',
         }}
       >
         Training Plan Coverage
@@ -70,12 +70,12 @@ export default function TrainingCoverage({ employees, plans }: TrainingCoverageP
             </Pie>
             <Tooltip
               contentStyle={{
-                background: '#0F172A',
+                background: 'var(--color-primary-950)',
                 border: 'none',
                 borderRadius: 8,
                 color: '#FFFFFF',
                 fontSize: 12,
-                fontFamily: "'DM Sans', system-ui, sans-serif",
+                fontFamily: 'var(--font-sans)',
               }}
               itemStyle={{ color: '#FFFFFF' }}
               formatter={(value, name) => [
@@ -90,9 +90,9 @@ export default function TrainingCoverage({ employees, plans }: TrainingCoverageP
               formatter={(value: string) => (
                 <span
                   style={{
-                    color: '#64748B',
+                    color: 'var(--text-muted)',
                     fontSize: 11,
-                    fontFamily: "'DM Sans', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                   }}
                 >
                   {value}
@@ -112,8 +112,8 @@ export default function TrainingCoverage({ employees, plans }: TrainingCoverageP
           style={{
             fontSize: 28,
             fontWeight: 800,
-            color: '#0F172A',
-            fontFamily: "'DM Sans', system-ui, sans-serif",
+            color: 'var(--color-primary-950)',
+            fontFamily: 'var(--font-sans)',
           }}
         >
           {pct}%
@@ -122,7 +122,7 @@ export default function TrainingCoverage({ employees, plans }: TrainingCoverageP
           style={{
             display: 'block',
             fontSize: 11,
-            color: '#94A3B8',
+            color: 'var(--text-muted)',
             marginTop: 2,
           }}
         >

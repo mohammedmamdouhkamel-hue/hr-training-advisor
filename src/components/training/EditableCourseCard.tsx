@@ -55,14 +55,14 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
     return (
       <div style={{
         background: 'var(--surface-card)',
-        border: '2px solid #3B82F6',
-        borderRadius: 10,
+        border: '2px solid var(--color-primary)',
+        borderRadius: 'var(--radius-md)',
         padding: '14px 16px',
         marginBottom: 10,
       }}>
         {/* Title */}
         <div style={{ marginBottom: 10 }}>
-          <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
+          <label style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
             Title
           </label>
           <input
@@ -76,7 +76,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
               border: '1px solid var(--surface-border)',
               background: 'var(--surface-bg)',
               color: 'var(--text-primary)',
-              fontSize: 13,
+              fontSize: 'var(--text-sm)',
               fontWeight: 600,
               fontFamily: 'inherit',
               outline: 'none',
@@ -88,7 +88,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
         {/* Platform + Duration + Level row */}
         <div style={{ display: 'flex', gap: 10, marginBottom: 10, flexWrap: 'wrap' }}>
           <div style={{ flex: 1, minWidth: 120 }}>
-            <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
+            <label style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
               Platform
             </label>
             <select
@@ -101,7 +101,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
                 border: '1px solid var(--surface-border)',
                 background: 'var(--surface-bg)',
                 color: 'var(--text-primary)',
-                fontSize: 12,
+                fontSize: 'var(--text-xs)',
                 fontFamily: 'inherit',
                 outline: 'none',
                 cursor: 'pointer',
@@ -113,7 +113,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
             </select>
           </div>
           <div style={{ flex: 1, minWidth: 100 }}>
-            <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
+            <label style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
               Duration
             </label>
             <input
@@ -128,7 +128,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
                 border: '1px solid var(--surface-border)',
                 background: 'var(--surface-bg)',
                 color: 'var(--text-primary)',
-                fontSize: 12,
+                fontSize: 'var(--text-xs)',
                 fontFamily: 'inherit',
                 outline: 'none',
                 boxSizing: 'border-box',
@@ -136,7 +136,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
             />
           </div>
           <div style={{ flex: 1, minWidth: 100 }}>
-            <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
+            <label style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
               Level
             </label>
             <select
@@ -149,7 +149,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
                 border: '1px solid var(--surface-border)',
                 background: 'var(--surface-bg)',
                 color: 'var(--text-primary)',
-                fontSize: 12,
+                fontSize: 'var(--text-xs)',
                 fontFamily: 'inherit',
                 outline: 'none',
                 cursor: 'pointer',
@@ -164,7 +164,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
 
         {/* Description */}
         <div style={{ marginBottom: 12 }}>
-          <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
+          <label style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
             Description
           </label>
           <textarea
@@ -178,7 +178,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
               border: '1px solid var(--surface-border)',
               background: 'var(--surface-bg)',
               color: 'var(--text-primary)',
-              fontSize: 12,
+              fontSize: 'var(--text-xs)',
               fontFamily: 'inherit',
               lineHeight: 1.5,
               resize: 'vertical',
@@ -200,9 +200,9 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
               padding: '6px 12px',
               borderRadius: 6,
               border: 'none',
-              background: confirmDelete ? '#EF4444' : '#FEE2E2',
-              color: confirmDelete ? '#fff' : '#DC2626',
-              fontSize: 12,
+              background: confirmDelete ? 'var(--color-danger)' : '#FEE2E2',
+              color: confirmDelete ? '#fff' : 'var(--color-danger)',
+              fontSize: 'var(--text-xs)',
               fontWeight: 600,
               cursor: 'pointer',
               fontFamily: 'inherit',
@@ -224,7 +224,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
                 border: '1px solid var(--surface-border)',
                 background: 'var(--surface-card)',
                 color: 'var(--text-secondary)',
-                fontSize: 12,
+                fontSize: 'var(--text-xs)',
                 fontWeight: 600,
                 cursor: 'pointer',
                 fontFamily: 'inherit',
@@ -243,9 +243,9 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
                 padding: '6px 14px',
                 borderRadius: 6,
                 border: 'none',
-                background: title.trim() ? '#0F172A' : '#94A3B8',
+                background: title.trim() ? 'var(--gradient-brand)' : 'var(--text-muted)',
                 color: '#fff',
-                fontSize: 12,
+                fontSize: 'var(--text-xs)',
                 fontWeight: 600,
                 cursor: title.trim() ? 'pointer' : 'not-allowed',
                 fontFamily: 'inherit',
@@ -283,7 +283,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
               height: 28,
               borderRadius: 6,
               border: 'none',
-              background: '#0F172A',
+              background: 'var(--color-primary-950)',
               color: '#fff',
               cursor: 'pointer',
               display: 'flex',
@@ -310,7 +310,7 @@ export default function EditableCourseCard({ course, onSave, onDelete }: Editabl
               height: 28,
               borderRadius: 6,
               border: 'none',
-              background: confirmDelete ? '#EF4444' : '#0F172A',
+              background: confirmDelete ? 'var(--color-danger)' : 'var(--color-primary-950)',
               color: '#fff',
               cursor: 'pointer',
               display: 'flex',
