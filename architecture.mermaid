@@ -1,0 +1,42 @@
+---
+title: HR Training Advisor — Application Architecture
+---
+graph TD
+    subgraph INPUT["🔵 Data Input"]
+        SAP["SAP SuccessFactors"] -->|export| CSV["CSV / XLSX File"]
+        SAMP["Sample Data"]
+        AKEY["API Key (sk-ant-)"]
+    end
+
+    subgraph PROC["🟣 Data Processing"]
+        PARSE["parseCSV() / XLSX.read()"] --> TRANS["transformRawData()"]
+        TRANS --> STATE["employees[] + plans{}"]
+    end
+
+    subgraph UI["🔵 React UI Components"]
+        UPV["Upload View\nDrag & Drop"] --> SIDE["Employee Sidebar\nFocus | Develop | Strong"]
+        SIDE --> MAIN["Main Panel\nScores + Charts"]
+        MAIN --> PLAN["Training Plan View\nOverview | Plan | Goals"]
+    end
+
+    subgraph AI["🟢 AI Engine"]
+        PRMPT["Prompt Builder"] --> CLAUDE["Claude Sonnet 4 API"]
+        CLAUDE --> JPARSE["JSON Parser"]
+        JPARSE --> PENF["Platform Enforcer"]
+    end
+
+    subgraph PLAT["🟢 Training Platforms (search links)"]
+        LI["LinkedIn"]
+        YT["YouTube"]
+        CO["Coursera"]
+        UD["Udemy"]
+        PL["Pluralsight"]
+        AIM["AIM"]
+    end
+
+    CSV --> PARSE
+    SAMP -.->|direct| STATE
+    STATE --> UI
+    PLAN -->|selected employee| PRMPT
+    AKEY -.->|auth| CLAUDE
+    PENF -->|90-day plan| PLAT

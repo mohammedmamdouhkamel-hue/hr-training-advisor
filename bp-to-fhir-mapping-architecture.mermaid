@@ -1,0 +1,78 @@
+---
+title: BP to FHIR — Clinical Code Mapping Architecture
+---
+graph LR
+    subgraph SRC["BP Source System"]
+        BP["Best Practice (BP)"]
+        HV["High Volume - Unmapped\n───\nMedications: 122,705\nConditions: 15,336\nAllergies: 6,331\nProcedures: 4,252"]
+        PM["Partially Mapped\n───\nImmunizations: 1,021\nObservations: 149"]
+        AM["Small / Already Mapped\n───\nPatient, Encounter\nPractitionerRole, Slot\nMedRequest, ServiceReq"]
+        TOT["Total: 148,000+ records\n16 FHIR resource types"]
+    end
+
+    subgraph PIPE["3-Tier Mapping Pipeline"]
+        subgraph T1["Tier 1: Terminology Server APIs - Automated Lookup"]
+            SN["SNOMED CT AU"]
+            IC["ICD-10-AM"]
+            AT["AMT"]
+            LO["LOINC"]
+            AI["AIR Codes"]
+            DC["DICOM"]
+        end
+        T1 -->|Unmatched| T2
+        subgraph T2["Tier 2: AI / NLP Mapping Engine\nFuzzy matching + confidence scoring"]
+        end
+        T2 -->|Unmatched| T3
+        subgraph T3["Tier 3: Clinical SME Review\nManual mapping & validation"]
+        end
+        T3 --> MR["Mapping Repository - Curated"]
+    end
+
+    subgraph FHIR["FHIR Data Lake"]
+        FR4["FHIR R4 (AU Base)"]
+        AI2["AllergyIntolerance"]
+        MED["Medication (AMT)"]
+        CON["Condition (SNOMED)"]
+        PRO["Procedure (SNOMED)"]
+        IMM["Immunization (AIR)"]
+        OBS["Observation (LOINC)"]
+        IMG["ImagingStudy (DICOM)"]
+        MORE["+ 9 more Resources"]
+        REPO["FHIR Data Repository"]
+    end
+
+    subgraph GOV["Governance & Quality Assurance"]
+        QD["Quality Dashboards"]
+        AUD["Audit Trail"]
+        VC["Version Control"]
+        UM["Unmapped Monitoring"]
+        CV["Clinical Validation"]
+    end
+
+    SRC -->|Extract| PIPE
+    PIPE -->|Transform| FHIR
+    FHIR --> GOV
+
+    subgraph DEPLOY["Deployment Platform Options"]
+        subgraph OPA["Option A: Azure Health Stack ✓ Recommended"]
+            AZ1["Azure Health Data Services"]
+            AZ2["Ontoserver CSIRO on Azure"]
+            AZ3["Azure OpenAI - NLP/AI Tier"]
+            AZ4["Azure Functions + Data Factory"]
+            AZ5["Power BI Dashboards"]
+        end
+        subgraph OPB["Option B: Open-Source Stack"]
+            OS1["HAPI FHIR on Docker / K8s"]
+            OS2["Ontoserver / Snowstorm"]
+            OS3["ClinicalBERT / BioBERT"]
+            OS4["Apache Airflow"]
+            OS5["Grafana / Metabase"]
+        end
+        subgraph OPC["Option C: AWS HealthLake"]
+            AW1["AWS HealthLake"]
+            AW2["Ontoserver on EC2"]
+            AW3["AWS Bedrock - NLP/AI"]
+            AW4["Step Functions + Lambda"]
+            AW5["QuickSight Dashboards"]
+        end
+    end
