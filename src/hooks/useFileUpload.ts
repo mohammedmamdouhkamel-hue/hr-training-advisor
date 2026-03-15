@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import type { Employee } from '../types/employee';
+import type { Employee, UploadMeta } from '../types/employee';
 import { parseCSV } from '../utils/csv-parser';
 import { transformRawData } from '../utils/data-transformer';
 import { SAMPLE_DATA } from '../constants/sample-data';
@@ -10,12 +10,13 @@ interface UseFileUploadCallbacks {
   setSelected: (emp: Employee | null) => void;
   setPlans: (plans: Record<string, never>) => void;
   setUploadedFile: (name: string | null) => void;
+  setUploadMeta: (meta: UploadMeta) => void;
   setError: (err: string) => void;
   setView: (view: 'upload' | 'dashboard') => void;
 }
 
 export function useFileUpload(callbacks: UseFileUploadCallbacks) {
-  const { setEmployees, setSelected, setPlans, setUploadedFile, setError, setView } = callbacks;
+  const { setEmployees, setSelected, setPlans, setUploadedFile, setUploadMeta, setError, setView } = callbacks;
 
   const handleFile = useCallback(async (file: File) => {
     if (!file) return;
@@ -59,22 +60,24 @@ export function useFileUpload(callbacks: UseFileUploadCallbacks) {
         throw new Error(`No competency scores found. Columns: ${Object.keys(rows[0]).join(', ')}`);
       }
       setEmployees(data);
+      setUploadMeta({ filename: file.name, employeeCount: data.length, uploadedAt: new Date().toISOString() });
       setSelected(null);
       setPlans({} as Record<string, never>);
       setView('dashboard');
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     }
-  }, [setEmployees, setSelected, setPlans, setUploadedFile, setError, setView]);
+  }, [setEmployees, setSelected, setPlans, setUploadedFile, setUploadMeta, setError, setView]);
 
   const loadSample = useCallback(() => {
     setEmployees(SAMPLE_DATA);
     setUploadedFile('sample_performance_data.csv');
+    setUploadMeta({ filename: 'sample_performance_data.csv', employeeCount: SAMPLE_DATA.length, uploadedAt: new Date().toISOString() });
     setSelected(null);
     setPlans({} as Record<string, never>);
     setError('');
     setView('dashboard');
-  }, [setEmployees, setSelected, setPlans, setUploadedFile, setError, setView]);
+  }, [setEmployees, setSelected, setPlans, setUploadedFile, setUploadMeta, setError, setView]);
 
   return { handleFile, loadSample };
 }

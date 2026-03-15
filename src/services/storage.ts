@@ -1,10 +1,11 @@
-import type { Employee } from '../types/employee';
+import type { Employee, UploadMeta } from '../types/employee';
 import type { TrainingPlan } from '../types/training-plan';
 
 const KEYS = {
   EMPLOYEES: 'hra:employees',
   PLANS: 'hra:plans',
   UPLOADED_FILE: 'hra:uploadedFile',
+  UPLOAD_META: 'hra:uploadMeta',
 } as const;
 
 function safeGet<T>(key: string): T | null {
@@ -46,6 +47,14 @@ export function saveUploadedFile(filename: string): void {
 
 export function loadUploadedFile(): string | null {
   return safeGet<string>(KEYS.UPLOADED_FILE);
+}
+
+export function saveUploadMeta(meta: UploadMeta): void {
+  safeSet(KEYS.UPLOAD_META, meta);
+}
+
+export function loadUploadMeta(): UploadMeta | null {
+  return safeGet<UploadMeta>(KEYS.UPLOAD_META);
 }
 
 export function clearAll(): void {

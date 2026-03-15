@@ -10,6 +10,12 @@ export interface Employee {
   competencies: Competencies;
 }
 
+export interface UploadMeta {
+  filename: string;
+  employeeCount: number;
+  uploadedAt: string; // ISO 8601
+}
+
 export type ScoreCategory = 'needsFocus' | 'developing' | 'strong';
 
 export function getScoreCategory(score: number): ScoreCategory {
