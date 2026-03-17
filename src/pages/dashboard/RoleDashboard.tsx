@@ -11,6 +11,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { ActivityFeed } from '../../components/dashboard/ActivityFeed';
 import { useEmployees } from '../../hooks/useEmployees';
 import { useTeamEmployees } from '../../hooks/useTeamEmployees';
+import { useTeamGoals } from '../../hooks/useTeamGoals';
 import { RoleBadge } from '../../components/shared/RoleBadge';
 import type { UserRole } from '../../types/auth';
 import type { Employee, UploadMeta } from '../../types/employee';
@@ -117,21 +118,24 @@ function getActions(navigate: (path: string) => void): Record<UserRole, QuickAct
   return {
     admin: [
       { label: 'Upload Results', Icon: Upload,    color: '#6366F1', onClick: () => navigate('/upload') },
-      { label: 'View Audit Log', Icon: BarChart3, color: '#8B5CF6', onClick: () => navigate('/admin/audit-log') },
+      { label: 'View Goals',     Icon: Target,    color: '#8B5CF6', onClick: () => navigate('/goals') },
+      { label: 'View Audit Log', Icon: BarChart3, color: '#059669', onClick: () => navigate('/admin/audit-log') },
       { label: 'System Config',  Icon: Zap,       color: '#0EA5E9', onClick: () => navigate('/admin/config') },
     ],
     manager: [
       { label: 'Team Members',   Icon: Users,        color: '#059669', onClick: () => navigate('/team') },
+      { label: 'Team Goals',     Icon: Target,       color: '#8B5CF6', onClick: () => navigate('/goals') },
       { label: 'Team Analytics', Icon: BarChart3,    color: '#6366F1', onClick: () => navigate('/analytics/team') },
-      { label: 'Assign Training',Icon: BookOpen,     color: '#8B5CF6', onClick: () => navigate('/team') },
     ],
     employee: [
+      { label: 'My Goals',             Icon: Target,     color: '#8B5CF6', onClick: () => navigate('/my-goals') },
       { label: 'My Training Plan',     Icon: BookOpen,   color: '#6366F1', onClick: () => navigate('/my-plan') },
-      { label: 'View Recommendations', Icon: Target,     color: '#8B5CF6', onClick: () => navigate('/recommendations') },
+      { label: 'View Recommendations', Icon: Lightbulb,  color: '#F59E0B', onClick: () => navigate('/recommendations') },
       { label: 'My Progress',          Icon: TrendingUp, color: '#059669', onClick: () => navigate('/my-progress') },
     ],
     hr_coordinator: [
       { label: 'Upload Results',  Icon: Upload,    color: '#7C3AED', onClick: () => navigate('/upload') },
+      { label: 'View Goals',      Icon: Target,    color: '#8B5CF6', onClick: () => navigate('/goals') },
       { label: 'Generate Report', Icon: FileText,  color: '#6366F1', onClick: () => navigate('/reports') },
       { label: 'View Analytics',  Icon: BarChart3, color: '#059669', onClick: () => navigate('/analytics') },
     ],
@@ -325,6 +329,7 @@ export const RoleDashboard: React.FC = () => {
   const navigate = useNavigate();
   const { employees: allEmployees, uploadMeta } = useEmployees();
   const { teamEmployees } = useTeamEmployees();
+  const { teamGoals } = useTeamGoals();
 
   // Managers/employees see scoped data; admin/HR see all
   const employees = user && ['manager', 'employee'].includes(user.role) ? teamEmployees : allEmployees;

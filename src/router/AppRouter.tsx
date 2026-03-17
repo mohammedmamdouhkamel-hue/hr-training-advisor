@@ -29,6 +29,11 @@ const SystemConfigPage = lazy(() => import('../pages/admin/SystemConfigPage'));
 const ReportsPage = lazy(() => import('../pages/reports/ReportsPage'));
 const ProfilePage = lazy(() => import('../pages/profile/ProfilePage'));
 const SettingsPage = lazy(() => import('../pages/settings/SettingsPage'));
+const GoalsListPage = lazy(() => import('../pages/goals/GoalsListPage'));
+const GoalDetailPage = lazy(() => import('../pages/goals/GoalDetailPage'));
+const GoalUploadPage = lazy(() => import('../pages/goals/GoalUploadPage'));
+const MyGoalsPage = lazy(() => import('../pages/goals/MyGoalsPage'));
+const GoalAnalyticsPage = lazy(() => import('../pages/analytics/GoalAnalyticsPage'));
 
 const LoadingFallback = () => (
   <div style={{
@@ -57,11 +62,18 @@ export default function AppRouter() {
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/settings" element={<SettingsPage />} />
 
+              {/* Goals */}
+              <Route path="/goals" element={<RoleGuard roles={['admin', 'manager', 'hr_coordinator']}><GoalsListPage /></RoleGuard>} />
+              <Route path="/goals/upload" element={<RoleGuard roles={['admin', 'hr_coordinator']}><GoalUploadPage /></RoleGuard>} />
+              <Route path="/goals/:goalId" element={<RoleGuard roles={['admin', 'manager', 'hr_coordinator', 'employee']}><GoalDetailPage /></RoleGuard>} />
+              <Route path="/my-goals" element={<RoleGuard roles={['employee']}><MyGoalsPage /></RoleGuard>} />
+
               {/* Admin + HR */}
               <Route path="/employees" element={<RoleGuard roles={['admin', 'hr_coordinator']}><EmployeesPage /></RoleGuard>} />
               <Route path="/employees/:name" element={<RoleGuard roles={['admin', 'hr_coordinator', 'manager']}><EmployeeDetailPage /></RoleGuard>} />
               <Route path="/upload" element={<RoleGuard roles={['admin', 'hr_coordinator']}><UploadResultsPage /></RoleGuard>} />
               <Route path="/analytics" element={<RoleGuard roles={['admin', 'hr_coordinator']}><AnalyticsPage /></RoleGuard>} />
+              <Route path="/analytics/goals" element={<RoleGuard roles={['admin', 'hr_coordinator']}><GoalAnalyticsPage /></RoleGuard>} />
               <Route path="/bulk-operations" element={<RoleGuard roles={['admin', 'hr_coordinator']}><BulkOperationsPage /></RoleGuard>} />
 
               {/* Manager */}

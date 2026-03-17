@@ -45,7 +45,12 @@ export type Permission =
   | 'admin:audit'
   | 'admin:impersonate'
   // Reporting
-  | 'reports:export';
+  | 'reports:export'
+  // Goals (read-only — SuccessFactors is master)
+  | 'goals:read:own'
+  | 'goals:read:team'
+  | 'goals:read:all'
+  | 'goals:import';
 
 // ─── Core entities ────────────────────────────────────────────
 export interface User {
@@ -159,6 +164,7 @@ export function isPermission(value: unknown): value is Permission {
     'bulk:upload', 'bulk:generate',
     'admin:config', 'admin:audit', 'admin:impersonate',
     'reports:export',
+    'goals:read:own', 'goals:read:team', 'goals:read:all', 'goals:import',
   ]);
   return typeof value === 'string' && PERMISSIONS.has(value);
 }

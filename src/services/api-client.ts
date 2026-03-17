@@ -1,10 +1,11 @@
 import type { Employee } from '../types/employee';
 import type { TrainingPlan } from '../types/training-plan';
 import type { PlatformKey } from '../types/platform';
+import type { Goal } from '../types/goal';
 import { PLATFORM_KEYS } from '../constants/platforms';
 import { getApiErrorMessage, getNetworkErrorMessage } from '../utils/error-messages';
 
-export async function generateTrainingPlan(employee: Employee, apiKey: string): Promise<TrainingPlan> {
+export async function generateTrainingPlan(employee: Employee, apiKey: string, goals?: Goal[]): Promise<TrainingPlan> {
   const weakAreas = Object.entries(employee.competencies)
     .sort((a, b) => a[1] - b[1])
     .slice(0, 3);
@@ -17,6 +18,10 @@ export async function generateTrainingPlan(employee: Employee, apiKey: string): 
     `- "${area}": course 1 → platform="${assigned[i][0]}", course 2 → platform="${assigned[i][1]}"`
   ).join('\n');
 
+  const goalsContext = goals && goals.length > 0
+    ? `\n\nEmployee Goals (prioritize training that aligns with these):\n${goals.map(g => `- [${g.weight}%] ${g.title}: ${g.description} (Rating: ${g.rating})`).join('\n')}\n\nIMPORTANT: Prioritize courses that help the employee achieve their stated goals.\nFocus especially on goals that are Unrated or rated Below expectations.`
+    : '';
+
   const prompt = `You are an expert HR L&D advisor. Create a personalised 90-day training plan.
 
 Employee: ${employee.name}
@@ -28,7 +33,7 @@ Competency Scores:
 ${Object.entries(employee.competencies).map(([k, v]) => `- ${k}: ${v}/100`).join('\n')}
 
 Weakest areas:
-${weakAreas.map(([k, v]) => `- ${k}: ${v}/100`).join('\n')}
+${weakAreas.map(([k, v]) => `- ${k}: ${v}/100`).join('\n')}${goalsContext}
 
 MANDATORY PLATFORM ASSIGNMENTS (follow exactly, no exceptions):
 ${assignments}
@@ -58,7 +63,8 @@ Respond ONLY with raw JSON (no markdown, no backticks, no preamble):
           "description": "one sentence on why this addresses the gap",
           "search_query": "exact course title for platform search"
         }
-      ]
+      ],
+      "aligned_goals": ["goal title that this training area helps achieve"]
     }
   ],
   "milestones": [

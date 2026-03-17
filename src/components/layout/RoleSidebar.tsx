@@ -5,7 +5,7 @@ import {
   LayoutDashboard, Users, BookOpen, BarChart3,
   UserCog, ScrollText, Settings, TrendingUp,
   Lightbulb, Upload, FileText, Download,
-  ChevronLeft, Menu, X, Network,
+  ChevronLeft, Menu, X, Network, Target,
 } from 'lucide-react';
 import type { UserRole } from '../../types/auth';
 import { useAuth } from '../../hooks/useAuth';
@@ -25,6 +25,7 @@ const NAV_CONFIG: Record<UserRole, NavItem[]> = {
   admin: [
     { path: '/dashboard',         label: 'Dashboard',       Icon: LayoutDashboard },
     { path: '/employees',         label: 'Employees',       Icon: Users            },
+    { path: '/goals',             label: 'Goals',           Icon: Target           },
     { path: '/upload',            label: 'Upload Results',  Icon: Upload           },
     { path: '/analytics',         label: 'Analytics',       Icon: BarChart3        },
     { path: '/admin/users',       label: 'User Management', Icon: UserCog          },
@@ -35,10 +36,12 @@ const NAV_CONFIG: Record<UserRole, NavItem[]> = {
   manager: [
     { path: '/dashboard',       label: 'Team Dashboard',  Icon: LayoutDashboard },
     { path: '/team',            label: 'Team Members',    Icon: Users            },
+    { path: '/goals',           label: 'Team Goals',      Icon: Target           },
     { path: '/analytics/team',  label: 'Team Analytics',  Icon: BarChart3        },
   ],
   employee: [
     { path: '/dashboard',       label: 'My Dashboard',    Icon: LayoutDashboard },
+    { path: '/my-goals',        label: 'My Goals',        Icon: Target           },
     { path: '/my-plan',         label: 'My Training Plan',Icon: BookOpen         },
     { path: '/my-progress',     label: 'My Progress',     Icon: TrendingUp       },
     { path: '/recommendations', label: 'Recommendations', Icon: Lightbulb        },
@@ -46,6 +49,7 @@ const NAV_CONFIG: Record<UserRole, NavItem[]> = {
   hr_coordinator: [
     { path: '/dashboard',          label: 'Dashboard',          Icon: LayoutDashboard },
     { path: '/employees',          label: 'All Employees',      Icon: Users            },
+    { path: '/goals',              label: 'Goals',              Icon: Target           },
     { path: '/upload',             label: 'Upload Results',     Icon: Upload           },
     { path: '/bulk-operations',    label: 'Bulk Operations',    Icon: FileText         },
     { path: '/analytics',          label: 'Dept Analytics',     Icon: BarChart3        },

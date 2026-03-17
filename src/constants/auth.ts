@@ -172,6 +172,7 @@ const ALL_PERMISSIONS: Permission[] = [
   'bulk:upload', 'bulk:generate',
   'admin:config', 'admin:audit', 'admin:impersonate',
   'reports:export',
+  'goals:read:own', 'goals:read:team', 'goals:read:all', 'goals:import',
 ];
 
 // ─── Role → Permission matrix ─────────────────────────────────
@@ -194,6 +195,7 @@ export const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
     'plans:approve',
     'analytics:read:team',
     'bulk:generate',
+    'goals:read:team',
   ],
 
   employee: [
@@ -203,6 +205,7 @@ export const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
     'plans:create:own',
     'plans:update:own',
     'analytics:read:own',
+    'goals:read:own',
   ],
 
   hr_coordinator: [
@@ -215,6 +218,8 @@ export const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
     'bulk:upload',
     'bulk:generate',
     'reports:export',
+    'goals:read:all',
+    'goals:import',
   ],
 };
 

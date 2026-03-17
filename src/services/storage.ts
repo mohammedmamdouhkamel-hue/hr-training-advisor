@@ -6,6 +6,8 @@ const KEYS = {
   PLANS: 'hra:plans',
   UPLOADED_FILE: 'hra:uploadedFile',
   UPLOAD_META: 'hra:uploadMeta',
+  GOALS: 'hra:goals',
+  GOAL_UPLOAD_META: 'hra:goalUploadMeta',
 } as const;
 
 function safeGet<T>(key: string): T | null {

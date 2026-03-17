@@ -14,6 +14,7 @@ export interface TrainingArea {
   current_score: number;
   target_score: number;
   courses: Course[];
+  aligned_goals?: string[];
 }
 
 export interface Milestone {

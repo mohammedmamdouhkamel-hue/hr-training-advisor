@@ -1,8 +1,9 @@
 import { useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Sparkles, Loader2, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Sparkles, Loader2, AlertCircle, Target } from 'lucide-react';
 import { useEmployees } from '../../hooks/useEmployees';
+import { useGoals } from '../../hooks/useGoals';
 import { useApiKey } from '../../hooks/useApiKey';
 import { useTrainingPlans } from '../../hooks/useTrainingPlans';
 import { getScoreCategory } from '../../types/employee';
@@ -17,6 +18,7 @@ export default function EmployeeDetailPage() {
   const { employees } = useEmployees();
   const { apiKey, setApiKey } = useApiKey();
   const { plans, loading, loadingMsg, error, doGenerate, setPlans } = useTrainingPlans(apiKey);
+  const { getGoalsForEmployee } = useGoals();
   const [showApiModal, setShowApiModal] = useState(false);
 
   const employee = useMemo(() => {
@@ -43,6 +45,9 @@ export default function EmployeeDetailPage() {
   const color = CATEGORY_COLORS[category];
   const plan = plans[employee.name];
   const competencies = Object.entries(employee.competencies).sort((a, b) => b[1] - a[1]);
+  const employeeGoals = getGoalsForEmployee(employee.name);
+  const goalWeightTotal = employeeGoals.reduce((s, g) => s + g.weight, 0);
+  const isGoalWeightValid = Math.abs(goalWeightTotal - 100) < 0.5;
 
   const handleGenerate = () => {
     if (!apiKey) {
@@ -169,6 +174,80 @@ export default function EmployeeDetailPage() {
           })}
         </div>
       </motion.div>
+
+      {/* Goals */}
+      {employeeGoals.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
+          style={{
+            borderRadius: 12, padding: '24px 28px', marginBottom: 24,
+            background: 'rgba(15,23,42,0.7)', border: '1px solid rgba(255,255,255,0.08)',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+            <h2 style={{ margin: 0, fontSize: '0.78rem', fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              Goals ({employeeGoals.length})
+            </h2>
+            <span style={{
+              padding: '3px 10px', borderRadius: 6, fontSize: '0.7rem', fontWeight: 600,
+              background: isGoalWeightValid ? 'rgba(52,211,153,0.1)' : 'rgba(248,113,113,0.1)',
+              color: isGoalWeightValid ? '#34D399' : '#F87171',
+              border: `1px solid ${isGoalWeightValid ? 'rgba(52,211,153,0.25)' : 'rgba(248,113,113,0.25)'}`,
+            }}>
+              Weight: {goalWeightTotal}% {isGoalWeightValid ? '(Valid)' : '(Invalid)'}
+            </span>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {employeeGoals.map(g => {
+              const ratingColors: Record<string, string> = { Outstanding: '#34D399', Exceeds: '#6366F1', Meets: '#FBBF24', Below: '#F87171', Unrated: '#64748B' };
+              const catColors: Record<string, string> = { 'Personal goals': '#818CF8', 'Department/Service goals': '#8B5CF6' };
+              const rc = ratingColors[g.rating] || '#64748B';
+              const cc = catColors[g.category] || '#818CF8';
+              return (
+                <div
+                  key={g.id}
+                  onClick={() => navigate(`/goals/${g.id}`)}
+                  style={{
+                    padding: '14px 18px', borderRadius: 10, cursor: 'pointer',
+                    background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)',
+                    transition: 'background 0.15s',
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = 'rgba(99,102,241,0.06)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.03)'; }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap' }}>
+                    <div style={{ flex: 1, minWidth: 160 }}>
+                      <p style={{ margin: '0 0 6px', fontSize: '0.86rem', color: '#F8FAFC', fontWeight: 600 }}>{g.title}</p>
+                      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                        <span style={{ padding: '2px 8px', borderRadius: 5, fontSize: '0.66rem', fontWeight: 600, background: `${cc}1A`, color: cc, border: `1px solid ${cc}33` }}>
+                          {g.category === 'Personal goals' ? 'Personal' : 'Dept/Svc'}
+                        </span>
+                        <span style={{ padding: '2px 8px', borderRadius: 5, fontSize: '0.66rem', fontWeight: 600, background: 'rgba(255,255,255,0.06)', color: '#94A3B8' }}>
+                          {g.weight}%
+                        </span>
+                        <span style={{ padding: '2px 8px', borderRadius: 5, fontSize: '0.66rem', fontWeight: 600, background: `${rc}1A`, color: rc, border: `1px solid ${rc}33` }}>
+                          {g.rating}
+                        </span>
+                      </div>
+                    </div>
+                    <div style={{ textAlign: 'right', minWidth: 60 }}>
+                      <p style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: '#F8FAFC' }}>{g.progress}%</p>
+                    </div>
+                  </div>
+                  <div style={{ marginTop: 8, height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.05)', overflow: 'hidden' }}>
+                    <div style={{
+                      height: '100%', borderRadius: 2, width: `${g.progress}%`,
+                      background: g.progress >= 80 ? 'linear-gradient(90deg, #34D399, #059669)' :
+                        g.progress >= 50 ? 'linear-gradient(90deg, #FBBF24, #F59E0B)' :
+                          'linear-gradient(90deg, #F87171, #EF4444)',
+                    }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </motion.div>
+      )}
 
       {/* Training Plan */}
       {plan && (
